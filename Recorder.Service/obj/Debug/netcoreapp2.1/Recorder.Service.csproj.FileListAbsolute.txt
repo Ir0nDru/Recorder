@@ -17,7 +17,6 @@ D:\Workspace\Recorder\Recorder.Service\bin\Debug\netcoreapp2.1\Recorder.Service.
 D:\Workspace\Recorder\Recorder.Service\bin\Debug\netcoreapp2.1\Recorder.Service.runtimeconfig.dev.json
 D:\Workspace\Recorder\Recorder.Service\bin\Debug\netcoreapp2.1\Recorder.Service.dll
 D:\Workspace\Recorder\Recorder.Service\bin\Debug\netcoreapp2.1\Recorder.Service.pdb
-D:\Workspace\Recorder\Recorder.Service\obj\Debug\netcoreapp2.1\Recorder.Service.csprojAssemblyReference.cache
 D:\Workspace\Recorder\Recorder.Service\obj\Debug\netcoreapp2.1\Recorder.Service.csproj.CoreCompileInputs.cache
 D:\Workspace\Recorder\Recorder.Service\obj\Debug\netcoreapp2.1\Recorder.Service.RazorAssemblyInfo.cache
 D:\Workspace\Recorder\Recorder.Service\obj\Debug\netcoreapp2.1\Recorder.Service.RazorAssemblyInfo.cs
@@ -26,3 +25,4 @@ D:\Workspace\Recorder\Recorder.Service\obj\Debug\netcoreapp2.1\Recorder.Service.
 D:\Workspace\Recorder\Recorder.Service\obj\Debug\netcoreapp2.1\Recorder.Service.RazorTargetAssemblyInfo.cache
 D:\Workspace\Recorder\Recorder.Service\obj\Debug\netcoreapp2.1\Recorder.Service.dll
 D:\Workspace\Recorder\Recorder.Service\obj\Debug\netcoreapp2.1\Recorder.Service.pdb
+D:\Workspace\Recorder\Recorder.Service\obj\Debug\netcoreapp2.1\Recorder.Service.csprojAssemblyReference.cache

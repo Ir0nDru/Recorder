@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Recorder.Service.Common;
-using Recorder.Service.Common.Attributes;
+using System.Data;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Recorder.Service.Attributes;
+using Recorder.Service.Dto;
 
 namespace Recorder.Service.Entities
 {
@@ -19,7 +18,7 @@ namespace Recorder.Service.Entities
         /// <summary>
         /// Camera IP-address
         /// </summary>
-        [Required, MaxLength(15)]
+        [Required, MaxLength(15)]        
         [IpAddress]
         public string IpAddress { get; set; }
 
@@ -35,6 +34,12 @@ namespace Recorder.Service.Entities
         /// </summary>
         [Required]
         public Status Status { get; set; }
+
+        /// <summary>
+        /// Human readable description to camera
+        /// </summary>
+        [MaxLength(200)]
+        public string Description { get; set; }
 
         public List<Record> Records { get; set; }
     }

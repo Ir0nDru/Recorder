@@ -13,7 +13,7 @@ namespace Recorder.Service
         {            
         }
 
-        private DbSet<Camera> Cameras { get; set; }
-        private DbSet<Record> Records { get; set; }
+        public DbSet<Camera> Cameras { get; set; }
+        public DbSet<Record> Records { get; set; }
     }
 }

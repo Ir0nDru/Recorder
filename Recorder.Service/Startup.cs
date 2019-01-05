@@ -26,10 +26,10 @@ namespace Recorder.Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=RecorderDatabase;Trusted_Connection=True;ConnectRetryCount=0";
+            const string connection = @"Server=(localdb)\mssqllocaldb;Database=RecorderDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<AppDatabaseContext>
                 (options => options.UseSqlServer(connection));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
