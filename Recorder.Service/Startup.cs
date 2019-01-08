@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Recorder.Service.Services;
 
 namespace Recorder.Service
 {
@@ -26,10 +28,13 @@ namespace Recorder.Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            const string connection = @"Server=(localdb)\mssqllocaldb;Database=RecorderDatabase;Trusted_Connection=True;ConnectRetryCount=0";
+            //const string connection = @"Server=(localdb)\mssqllocaldb;Database=RecorderDatabase;Trusted_Connection=True;ConnectRetryCount=0";            
             services.AddDbContext<AppDatabaseContext>
-                (options => options.UseSqlServer(connection));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);            
+                (options => options.UseSqlServer(Configuration.GetConnectionString(nameof(AppDatabaseContext))));
+            services.AddScoped<CameraService>();
+            services.AddScoped<RecordService>();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                             .AddJsonOptions(o => o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

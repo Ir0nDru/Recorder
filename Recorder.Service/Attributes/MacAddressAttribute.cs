@@ -9,6 +9,9 @@ namespace Recorder.Service.Attributes
         {
             string mac = (string)value;
 
+            if (mac == null)
+                return ValidationResult.Success;
+
             var addMacReg = "^[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}$";            
             var regex = new Regex(addMacReg);
 

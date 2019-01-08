@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Recorder.Service.Attributes;
 
 namespace Recorder.Service.Entities
@@ -39,7 +35,7 @@ namespace Recorder.Service.Entities
 
         /// <summary>
         /// Foreign key to camera        
-        /// </summary>
+        /// </summary>        
         public int CameraId { get; set; }
         public Camera Camera { get; set; }
 

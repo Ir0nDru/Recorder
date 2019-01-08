@@ -2,8 +2,8 @@
 {
     public enum Status
     {
-        Offline,
-        Online,
-        Recording
+        Offline = 1,
+        Online = 2,
+        Recording = 3
     }
 }

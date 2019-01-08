@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Recorder.Service.Dto;
 using Recorder.Service.Entities;
 using Recorder.Service.Helpers;
@@ -19,35 +20,14 @@ namespace Recorder.Service.Services
             _recordService = recordService;
         }
 
-        public CameraWrapper[] GetAllCameras()
+        public Camera[] GetAllCameras()
         {
-            var cameras = (from camera in _ctx.Cameras
-                           join record in _ctx.Records on camera.Id equals record.CameraId into records
-                           select new {camera, records})
-                           .AsEnumerable()
-                           .Select(x => new CameraWrapper{Camera = x.camera, Records = x.records.ToArray()});
-            return cameras.ToArray();
-        }
-
-        public CameraWrapper GetFullCamera(int id)
-        {
-            var camera = _ctx.Cameras.Find(id);
-
-            if (camera == null)
-                throw new ArgumentException($"Camera with id: {id} not found.");
-
-            var records = _ctx.Records.Where(r => r.CameraId == camera.Id); //TODO use records service instead
-
-            return new CameraWrapper
-            {
-                Camera = camera,
-                Records = records.ToArray()
-            };
-        }
+            return _ctx.Cameras.Include(c => c.Records).ToArray();
+        }        
 
         public Camera GetCamera(int id)
         {
-            var camera = _ctx.Cameras.Find(id);
+            var camera = _ctx.Cameras.Include(c => c.Records).FirstOrDefault(c => c.Id == id);
 
             if (camera == null)
                 throw new ArgumentException($"Camera with id: {id} not found.");
@@ -87,7 +67,7 @@ namespace Recorder.Service.Services
 
             if (existing == null)
                 throw new ArgumentException($"Camera with id: {id} not found.");            
-            _ctx.Records.RemoveRange(_recordService.GetRecordsByCameraId(id));
+            //_ctx.Records.RemoveRange(_recordService.GetRecordsByCameraId(id));
             _ctx.Cameras.Remove(existing);
             _ctx.SaveChanges();
         }

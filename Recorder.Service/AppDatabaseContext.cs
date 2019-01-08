@@ -13,6 +13,14 @@ namespace Recorder.Service
         {            
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Camera>()
+                .HasMany(c => c.Records)
+                .WithOne(r => r.Camera)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+
         public DbSet<Camera> Cameras { get; set; }
         public DbSet<Record> Records { get; set; }
     }

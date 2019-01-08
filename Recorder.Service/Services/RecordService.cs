@@ -7,28 +7,19 @@ using Recorder.Service.Entities;
 namespace Recorder.Service.Services
 {
     public class RecordService
-    {
-        private readonly CameraService _cameraService;
+    {        
         private readonly AppDatabaseContext _ctx;
 
-        public RecordService(AppDatabaseContext ctx, CameraService cameraService)
+        public RecordService(AppDatabaseContext ctx)
         {
-            _ctx = ctx;
-            _cameraService = cameraService;
-        }
-
-        public Record[] GetRecordsByCameraId(int camId)
-        {
-            return _ctx.Records.Where(r => r.CameraId == camId).ToArray();
-        }
+            _ctx = ctx;            
+        }        
 
         public void CreateRecord(Record record)
         {
-            var camera = _cameraService.GetCamera(record.CameraId);
-
-            if (camera == null)
-                throw new ArgumentException($"Corresponding to record camera with id: {record.CameraId} not found.");
-
+            if (_ctx.Records.Any(r => r.StartTime == record.StartTime && r.EndTime == record.EndTime && r.CameraId == record.CameraId))
+                throw new ArgumentException($"Attempted to create duplicate record");
+            record.Id = 0;
             _ctx.Records.Add(record);
             _ctx.SaveChanges();
         }
@@ -36,18 +27,19 @@ namespace Recorder.Service.Services
         public void UpdateRecord(Record record)
         {
             var existing = _ctx.Records.Find(record.Id);
-            var camera = _cameraService.GetCamera(record.CameraId);
 
             if (existing == null)
                 throw new ArgumentException($"Record with id: {record.Id} not found.");
-            if (camera == null)
+            if (!_ctx.Cameras.Any(c => c.Id == record.CameraId))
                 throw new ArgumentException($"Corresponding to record camera with id: {record.CameraId} not found.");
+            if (_ctx.Records.Any(r => r.StartTime == record.StartTime && r.EndTime == record.EndTime && r.CameraId == record.CameraId))
+                throw new ArgumentException($"Attempted to create duplicate record");
 
             existing.StartTime = record.StartTime;
             existing.EndTime = record.EndTime;
             existing.CameraId = record.CameraId;
             existing.Description = record.Description;
-            
+
             _ctx.SaveChanges();
         }
 
@@ -59,7 +51,7 @@ namespace Recorder.Service.Services
                 throw new ArgumentException($"Record with id: {id} not found.");            
 
             _ctx.Records.Remove(existing);
-            _ctx.SaveChanges();
+            _ctx.SaveChanges();            
         }
     }
 }
