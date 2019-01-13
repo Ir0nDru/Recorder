@@ -1,0 +1,11 @@
+D:\Workspace\Recorder\Recorder.Executor\bin\Debug\netcoreapp2.1\Recorder.Executor.deps.json
+D:\Workspace\Recorder\Recorder.Executor\bin\Debug\netcoreapp2.1\Recorder.Executor.runtimeconfig.json
+D:\Workspace\Recorder\Recorder.Executor\bin\Debug\netcoreapp2.1\Recorder.Executor.runtimeconfig.dev.json
+D:\Workspace\Recorder\Recorder.Executor\bin\Debug\netcoreapp2.1\Recorder.Executor.dll
+D:\Workspace\Recorder\Recorder.Executor\bin\Debug\netcoreapp2.1\Recorder.Executor.pdb
+D:\Workspace\Recorder\Recorder.Executor\obj\Debug\netcoreapp2.1\Recorder.Executor.csprojAssemblyReference.cache
+D:\Workspace\Recorder\Recorder.Executor\obj\Debug\netcoreapp2.1\Recorder.Executor.csproj.CoreCompileInputs.cache
+D:\Workspace\Recorder\Recorder.Executor\obj\Debug\netcoreapp2.1\Recorder.Executor.AssemblyInfoInputs.cache
+D:\Workspace\Recorder\Recorder.Executor\obj\Debug\netcoreapp2.1\Recorder.Executor.AssemblyInfo.cs
+D:\Workspace\Recorder\Recorder.Executor\obj\Debug\netcoreapp2.1\Recorder.Executor.dll
+D:\Workspace\Recorder\Recorder.Executor\obj\Debug\netcoreapp2.1\Recorder.Executor.pdb
