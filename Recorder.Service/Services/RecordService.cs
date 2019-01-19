@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Recorder.Service.Dto;
 using Recorder.Service.Entities;
 
 namespace Recorder.Service.Services
@@ -19,7 +20,10 @@ namespace Recorder.Service.Services
         {
             if (_ctx.Records.Any(r => r.StartTime == record.StartTime && r.EndTime == record.EndTime && r.CameraId == record.CameraId))
                 throw new ArgumentException($"Attempted to create duplicate record");
+
             record.Id = 0;
+            record.Status = RecordStatus.Awaits;
+
             _ctx.Records.Add(record);
             _ctx.SaveChanges();
         }
@@ -39,6 +43,10 @@ namespace Recorder.Service.Services
             existing.EndTime = record.EndTime;
             existing.CameraId = record.CameraId;
             existing.Description = record.Description;
+            existing.Status = (record.Status != RecordStatus.Awaits && record.Status != RecordStatus.Recording &&
+                               record.Status != RecordStatus.Finished && record.Status != RecordStatus.Unknown)
+                ? RecordStatus.Unknown
+                : record.Status;
 
             _ctx.SaveChanges();
         }

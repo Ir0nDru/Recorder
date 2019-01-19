@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Recorder.Service.Attributes;
+using Recorder.Service.Dto;
 
 namespace Recorder.Service.Entities
 {
@@ -26,6 +27,12 @@ namespace Recorder.Service.Entities
         [DataType(DataType.DateTime)]
         [DateGreaterThan("StartTime")]
         public DateTime EndTime { get; set; }
+
+        /// <summary>
+        /// Records current status
+        /// </summary>
+        [Required]
+        public RecordStatus Status { get; set; }
 
         /// <summary>
         /// Human readable record description

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Recorder.Service.Dto;
 using Recorder.Service.Entities;
 using Recorder.Service.Helpers;
+using Remotion.Linq.Clauses;
 
 namespace Recorder.Service.Services
 {
@@ -23,7 +24,25 @@ namespace Recorder.Service.Services
         public Camera[] GetAllCameras()
         {
             return _ctx.Cameras.Include(c => c.Records).ToArray();
-        }        
+        }
+
+        /// <summary>
+        /// Returns all cameras with actual records to play
+        /// </summary>
+        /// <param name="actualTimeSpan">Timespan of actuality of a record</param>
+        /// <returns></returns>
+        public Camera[] GetActualCameras(TimeSpan actualTimeSpan)
+        {
+            var delayTime = DateTime.Now + actualTimeSpan;
+
+            var cameras = _ctx.Cameras.Select(c => c);
+            var records = _ctx.Records.Where(r => r.StartTime <= delayTime && r.EndTime > delayTime && r.Status == RecordStatus.Awaits);
+            foreach (var camera in cameras)
+            {
+                camera.Records = records.Where(r => r.CameraId == camera.Id).ToList();
+            }
+            return cameras.ToArray();
+        }
 
         public Camera GetCamera(int id)
         {
@@ -42,6 +61,9 @@ namespace Recorder.Service.Services
             if (existing != null)
                 throw new ArgumentException($"Camera with IP: {existing.IpAddress} already exists");
 
+            camera.Id = 0;
+            camera.Status = CameraStatus.Offline;
+
             _ctx.Add(camera);
             _ctx.SaveChanges();
         }
@@ -55,7 +77,7 @@ namespace Recorder.Service.Services
 
             existing.IpAddress = camera.IpAddress;
             existing.MacAddress = camera.MacAddress;
-            existing.Status = camera.Status;
+            existing.Status = (camera.Status != CameraStatus.Offline && camera.Status != CameraStatus.Online) ? CameraStatus.Offline : camera.Status;
             existing.Description = camera.Description;            
 
             _ctx.SaveChanges();            
