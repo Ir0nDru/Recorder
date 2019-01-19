@@ -27,9 +27,9 @@ namespace Recorder.Service.Controllers
             return Ok(_cameraService.GetAllCameras());
         }
 
-        // GET api/cameras/actual
+        // GET api/cameras/actual?delayseconds=5
         [HttpGet("actual")]
-        public ActionResult<Camera[]> GetActualCameras(int delaySeconds)
+        public ActionResult<Camera[]> GetActualCameras([FromQuery]int delaySeconds)
         {
             return Ok(_cameraService.GetActualCameras(TimeSpan.FromSeconds(delaySeconds)));
         }
