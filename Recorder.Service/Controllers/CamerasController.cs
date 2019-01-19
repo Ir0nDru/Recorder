@@ -27,6 +27,13 @@ namespace Recorder.Service.Controllers
             return Ok(_cameraService.GetAllCameras());
         }
 
+        // GET api/cameras/actual
+        [HttpGet("actual")]
+        public ActionResult<Camera[]> GetActualCameras(int delaySeconds)
+        {
+            return Ok(_cameraService.GetActualCameras(TimeSpan.FromSeconds(delaySeconds)));
+        }
+
         // GET api/cameras/1
         // GET api/cameras/2
         // GET api/cameras/3 - where number is id of a camera

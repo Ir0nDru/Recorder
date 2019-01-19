@@ -34,7 +34,7 @@ namespace Recorder.Service.Migrations
                     b.Property<string>("MacAddress")
                         .HasMaxLength(17);
 
-                    b.Property<int>("Status");
+                    b.Property<int>("CameraStatus");
 
                     b.HasKey("Id");
 

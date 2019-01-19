@@ -57,6 +57,8 @@ namespace Recorder.Service.Migrations
 
                     b.Property<DateTime>("StartTime");
 
+                    b.Property<int>("Status");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CameraId");

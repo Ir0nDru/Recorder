@@ -10,8 +10,8 @@ using Recorder.Service;
 namespace Recorder.Service.Migrations
 {
     [DbContext(typeof(AppDatabaseContext))]
-    [Migration("20190104155046_Initial")]
-    partial class Initial
+    [Migration("20190117204953_fixedColumnName")]
+    partial class fixedColumnName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,14 +27,17 @@ namespace Recorder.Service.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(200);
+
                     b.Property<string>("IpAddress")
                         .IsRequired()
                         .HasMaxLength(15);
 
                     b.Property<string>("MacAddress")
-                        .HasMaxLength(15);
+                        .HasMaxLength(17);
 
-                    b.Property<int>("CameraStatus");
+                    b.Property<int>("Status");
 
                     b.HasKey("Id");
 
@@ -49,9 +52,14 @@ namespace Recorder.Service.Migrations
 
                     b.Property<int>("CameraId");
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(200);
+
                     b.Property<DateTime>("EndTime");
 
                     b.Property<DateTime>("StartTime");
+
+                    b.Property<int>("Status");
 
                     b.HasKey("Id");
 

@@ -33,7 +33,7 @@ namespace Recorder.Service.Entities
         /// Camera current status
         /// </summary>
         [Required]
-        public Status Status { get; set; }
+        public CameraStatus Status { get; set; }
 
         /// <summary>
         /// Human readable description to camera
