@@ -10,7 +10,7 @@ namespace Recorder.Service.Entities
         /// <summary>
         /// Record Id
         /// </summary>
-        [Key, Required]
+        [Key]
         public int Id { get; set; }
 
         /// <summary>

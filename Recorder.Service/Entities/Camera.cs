@@ -12,7 +12,7 @@ namespace Recorder.Service.Entities
         /// <summary>
         /// Camera Id
         /// </summary>
-        [Key, Required]
+        [Key]
         public int Id { get; set; }
 
         /// <summary>

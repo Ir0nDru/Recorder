@@ -27,7 +27,7 @@ namespace Recorder.Executor
             RecordAsync(connectionParameters, cancellationTokenSource.Token, ipAdress, timeSpan).Wait(CancellationToken.None);
         }
 
-        private static async Task RecordAsync(ConnectionParameters connectionParameters, CancellationToken token, string ipAdress, string timeSpan)
+        private static async Task RecordAsync(ConnectionParameters connectionParameters, CancellationToken token, string ipAddress, string timeSpan)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace Recorder.Executor
             catch (OperationCanceledException)
             {
             }
-            string args = $"-i rtsp://@{ipAdress} -t {timeSpan} -acodec copy -vcodec copy {DateTime.Now.ToFileTime().ToString()}.mp4";
+            string args = $"-i rtsp://@{ipAddress} -t {timeSpan} -acodec copy -vcodec copy {DateTime.Now.ToFileTime().ToString()}.mp4";
             var process = new Process
             {
                 StartInfo =
@@ -71,7 +71,7 @@ namespace Recorder.Executor
             process.WaitForExit();
         }
 
-        public static async Task MakeRecordingTaskAsync()
+        public static void MakeRecordingTaskAsync()
         {
 
             var request = new RestRequest("cameras/actual/60", Method.GET);

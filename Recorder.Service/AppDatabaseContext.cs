@@ -15,6 +15,7 @@ namespace Recorder.Service
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ForNpgsqlUseIdentityAlwaysColumns();
             modelBuilder.Entity<Camera>()
                 .HasMany(c => c.Records)
                 .WithOne(r => r.Camera)
