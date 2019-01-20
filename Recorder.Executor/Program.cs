@@ -1,34 +1,24 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+using Hangfire;
 
 namespace Recorder.Executor
 {
     class Program
     {
+
         static void Main(string[] args)
         {
-            ProcessStartInfo info = new ProcessStartInfo
+            Thread.Sleep(5000);
+            GlobalConfiguration.Configuration.UseSqlServerStorage(@"Data Source=DESKTOP-BT6P7VD\SQLEXPRESS;Initial Catalog=HangfireDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            using (new BackgroundJobServer())
             {
-                FileName = "ping",
-                Arguments = $"localhost",
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-                //FileName = "cmd.exe",
-                //Arguments = "dir",
-                //RedirectStandardOutput = true,
-                //CreateNoWindow = true,
-                //UseShellExecute = false
-            };
-            Process proc = new Process
-            {
-                StartInfo = info
-            };
-            proc.Start();
-            string str = proc.StandardOutput.ReadToEnd();
-            proc.WaitForExit();
-            Console.WriteLine(str);
-            Console.ReadLine();
-        }        
+                RecurringJob.AddOrUpdate(
+                        () => ExecutorHelper.MakeRecordingTaskAsync(),
+                        Cron.Minutely);
+                Console.ReadKey();
+            }
+        }
     }
 }
