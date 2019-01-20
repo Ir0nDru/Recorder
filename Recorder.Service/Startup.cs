@@ -23,7 +23,7 @@ namespace Recorder.Service
         {
             //const string connection = @"Server=(localdb)\mssqllocaldb;Database=RecorderDatabase;Trusted_Connection=True;ConnectRetryCount=0";            
             services.AddDbContext<AppDatabaseContext>
-                (options => options.UseSqlServer(Configuration.GetConnectionString(nameof(AppDatabaseContext))));
+                (options => options.UseNpgsql(Configuration.GetConnectionString(nameof(AppDatabaseContext))));
             services.AddScoped<CameraService>();
             services.AddScoped<RecordService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
