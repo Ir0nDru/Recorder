@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Recorder.Service.Dto;
 using Recorder.Service.Entities;
 
@@ -27,10 +28,10 @@ namespace Recorder.Service.Services
             _ctx.Records.Add(record);
             _ctx.SaveChanges();
         }
-
-        public void UpdateRecord(Record record)
+        
+        public void UpdateRecord(int id, Record record)
         {
-            var existing = _ctx.Records.Find(record.Id);
+            var existing = _ctx.Records.Find(id);
 
             if (existing == null)
                 throw new ArgumentException($"Record with id: {record.Id} not found.");

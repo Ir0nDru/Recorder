@@ -41,11 +41,12 @@ namespace Recorder.Service.Controllers
             }
         }
 
-        public ActionResult UpdateRecord(Record record)
+        [HttpPut("{id}")]
+        public ActionResult UpdateRecord(int id, Record record)
         {
             try
             {
-                _recordService.UpdateRecord(record);
+                _recordService.UpdateRecord(id, record);
                 return Ok();
             }
             catch (Exception e)
