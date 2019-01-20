@@ -16,7 +16,7 @@ namespace Recorder.Executor
 
         static void Main(string[] args)
         {
-            GlobalConfiguration.Configuration.UseSqlServerStorage(@"Server=(localdb)\\mssqllocaldb;Database=Hangfire.Sample;Trusted_Connection=True;");
+            GlobalConfiguration.Configuration.UseSqlServerStorage(@"Server=(localdb)\\mssqllocaldb;Database=HangfireDB;Trusted_Connection=True;");
             using (new BackgroundJobServer())
             {
                 var clientCameraService = new RestClient(new Uri("http://localhost:5000"));
